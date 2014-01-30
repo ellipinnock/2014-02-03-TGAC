@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h2 id="testing-in-practice">Testing in practice</h2>
+<p>The example we've looked at is based on one function. Suppose we have a complex legacy code of 10000s of lines and which takes many input files and produces many output files. Exactly the same approach can be used as above - we run our code on a set of input files and check whether the output files match what you'd expect. For example, we could,</p>
+<ul>
+<li>Run the code on a set of inputs.</li>
+<li>Save the outputs.</li>
+<li>Refactor the code e.g. to optimise it or parallelise it.</li>
+<li>Run the code on the inputs.</li>
+<li>Check that the outputs match the saved outputs.</li>
+</ul>
+<p>This was the approach taken by EPCC and the Colon Cancer Genetics Group (CCGG) of the MRC Human Genetics Unit at the Western General as part of an <a href="http://www.edikt.org/edikt2/OncologyActivity">Oncology</a> project to optimise and parallelise a FORTRAN genetics code.</p>
+<p>The <a href="http://www.mice.iit.edu/">Muon Ion Cooling Experiment</a> (MICE) have a large number of tests written in Python. They use <a href="">Jenkins</a>, a <em>continuous integration server</em> to build their code and trigger the running of the tests which are then <a href="https://micewww.pp.rl.ac.uk/tab/show/maus">published online</a>.</p>
+<h2 id="when-1-1-2.0000001">When 1 + 1 = 2.0000001</h2>
+<p>Computers don't do floating point arithmetic too well. This can make simple tests for the equality of two floating point values problematic due to imprecision in the values being compared.</p>
+<pre><code>$ python
+&gt;&gt;&gt; expected = 1 + 1 
+&gt;&gt;&gt; actual = 2.0000001
+&gt;&gt;&gt; assert expected == actual</code></pre>
+<p>We can get round this by comparing to within a given threshold, or delta, for example we may consider <em>expected</em> and <em>actual</em> to be equal if <em>expected - actual &lt; 0.000000000001</em>.</p>
+<p>Test frameworks such as <code>nose</code>, often provide functions to handle this for us. For example, to test that 2 numbers are equal when rounded to a given number of decimal places,</p>
+<pre><code>$ python
+&gt;&gt;&gt; from nose.tools import assert_almost_equal
+&gt;&gt;&gt; assert_almost_equal(expected, actual, 0)
+&gt;&gt;&gt; assert_almost_equal(expected, actual, 1)
+&gt;&gt;&gt; assert_almost_equal(expected, actual, 3)
+&gt;&gt;&gt; assert_almost_equal(expected, actual, 6)
+&gt;&gt;&gt; assert_almost_equal(expected, actual, 7)
+...
+AssertionError: 2 != 2.0000000999999998 within 7 places</code></pre>
+<p>What do we consider to be a suitable threshold for equality? That is application-specific - for some domains we might be happy to round to the nearest whole number, for others we may want to be far, far more accurate.</p>
+<h2 id="when-should-we-test">When should we test?</h2>
+<p>We should test,</p>
+<ul>
+<li>Always!</li>
+<li>Early, and not wait till after we've used it to generate data for our important paper, or given it to someone else to use.</li>
+<li>Often, so that we know that any changes we've made to our code, or to things that our code needs (e.g. libraries, configuration files etc.) haven't introduced any bugs.</li>
+</ul>
+<p>But, when should we finish writing tests? How much is enough?</p>
+<blockquote>
+<p><strong>What we know about software development - we can't test everything</strong></p>
+</blockquote>
+<blockquote>
+<p>&quot;It is nearly impossible to test software at the level of 100 percent of its logic paths&quot;, fact 32 in R. L. Glass (2002) <a href="http://www.amazon.com/Facts-Fallacies-Software-Engineering-Robert/dp/0321117425">Facts and Fallacies of Software Engineering</a> (<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.94.2037&amp;rep=rep1&amp;type=pdf">PDF</a>).</p>
+</blockquote>
+<p>We can't test everything but that's no excuse for testing nothing! How much to test is something to be learned by experience, so think of it as analogous to when you finish proof reading a paper, over and over, before sending it to a conference. If you find bugs when you use your code, you did too little, so consider what you might have done and how to address this next time.</p>
+<p>Tests, like code, should ideally be reviewed by a colleague which helps avoid tests that,</p>
+<ul>
+<li>Pass when they should fail, false positives.</li>
+<li>Fail when they should pass, false negatives.</li>
+<li>Don't test anything.</li>
+</ul>
+<p>For example,</p>
+<pre><code>def test_critical_correctness():
+    # TODO - will complete this tomorrow!
+    pass</code></pre>
+<p>Yes, tests like this <em>do</em> occur on projects!</p>
+<p>Previous: <a href="Writing.md">Let's start writing some tests</a> Next: <a href="TDD.md">Test-driven development</a></p>
+</body>
+</html>

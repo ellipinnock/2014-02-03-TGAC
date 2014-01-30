@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h2 id="lets-start-writing-some-tests">Let's start writing some tests</h2>
+<p>In the file <a href="python/dna/dna.py">dna.py</a> we have a Python dictionary that stores the molecular weights of the 4 standard DNA nucleotides, A, T, C and G,</p>
+<pre><code>NUCLEOTIDES = {&#39;A&#39;:131.2, &#39;T&#39;:304.2, &#39;C&#39;:289.2, &#39;G&#39;:329.2}</code></pre>
+<p>and a Python function that takes a DNA sequence as input and returns its molecular weight, which is the sum of the weights for each nucelotide in the sequence,</p>
+<pre><code>def calculate_weight(sequence):
+    &quot;&quot;&quot;
+    Calculate the molecular weight of a DNA sequence.
+    @param sequence: DNA sequence expressed as an upper-case string. 
+    @return molecular weight.
+    &quot;&quot;&quot;
+    weight = 0.0
+    for ch in sequence:
+        weight += NUCLEOTIDES[ch]
+    return weight</code></pre>
+<p>We can calculate the molecular weight of a sequence by,</p>
+<pre><code>weight = calculate_weight(&#39;GATGCTGTGGATAA&#39;)
+print weight</code></pre>
+<p>We can add a test to our code as follows,</p>
+<pre><code>def calculate_weight(sequence):
+    &quot;&quot;&quot;
+    Calculate the molecular weight of a DNA sequence.
+
+    @param sequence: DNA sequence expressed as an upper-case string.
+    @return molecular weight.
+    &quot;&quot;&quot;
+    weight = 0.0
+    try:
+        for ch in sequence:
+            weight += NUCLEOTIDES[ch]
+        return weight
+    except TypeError:
+        print &#39;The input is not a sequence e.g. a string or list&#39;</code></pre>
+<p>If the input is not a string, or a list of characters then the <code>for...in</code> statement will <em>raise an exception</em> which is <em>caught</em> by the <code>except</code> block. For example,</p>
+<pre><code>print calculate_weight(123)</code></pre>
+<p>This is a <em>runtime test</em>. It alerts the user to exceptional behavior in the code. Often, exceptions are related to functions that depend on input that is unknown at compile time. Such tests make our code robust and allows our code to behave gracefully - they anticipate problematic values and handle them.</p>
+<p>Often, we want to pass such errors to other points in our program rather than just print a message and continue. So, for example we could do,</p>
+<pre><code>except TypeError:
+    raise ValueError(&#39;The input is not a sequence e.g. a string or list&#39;)</code></pre>
+<p>which raises a new exception, with a more meaningful message. If writing a complex application, our user interface could then present this to the user e.g. as a dialog box.</p>
+<p>Runtime tests don't test our functions behaviour or whether it's implemented correctly. So, we can add some tests,</p>
+<pre><code>print &quot;A is &quot;, calculate_weight(&#39;A&#39;)
+print &quot;G is &quot;, calculate_weight(&#39;G&#39;)
+print &quot;GA is &quot;, calculate_weight(&#39;GA&#39;)</code></pre>
+<p>But we'd have to visually inspect the results to see they are as expected. So, let's have the computer do that for us and make our lives easier, and save us time in checking,</p>
+<pre><code>assert calculate_weight(&#39;A&#39;) == 131.2
+assert calculate_weight(&#39;G&#39;) == 329.2
+assert calculate_weight(&#39;GA&#39;) == 460.4</code></pre>
+<p><code>assert</code> checks whether a condition is true and, if not, raises an exception.</p>
+<p>We explicitly list the expected weights in each statement. But, by doing this there is a risk that we mistype one. A good design principle is to define constant values in one place only. As we already have defined them in <code>nucleotides</code> we can just refer to that,</p>
+<pre><code>assert calculate_weight(&#39;A&#39;) == NUCLEOTIDES[&#39;A&#39;]
+assert calculate_weight(&#39;G&#39;) == NUCLEOTIDES[&#39;G&#39;]
+assert calculate_weight(&#39;GA&#39;) == NUCLEOTIDES[&#39;G&#39;] + NUCLEOTIDES[&#39;A&#39;]</code></pre>
+<p>But this isn't very modular, and modularity is a good design principle, so let's define some test functions,</p>
+<pre><code>def test_a():
+    assert calculate_weight(&#39;A&#39;) == NUCLEOTIDES[&#39;A&#39;]
+def test_g():
+    assert calculate_weight(&#39;G&#39;) == NUCLEOTIDES[&#39;G&#39;]
+def test_ga():
+    assert calculate_weight(&#39;GA&#39;) == NUCLEOTIDES[&#39;G&#39;] + NUCLEOTIDES[&#39;A&#39;]
+
+test_a()
+test_g()
+test_ga()</code></pre>
+<p>And, rather than have our tests and code in the same file, let's separate them out. So, let's create</p>
+<pre><code>$ nano test_dna.py</code></pre>
+<p>Now, our function and nucleotides data are in <code>dna.py</code> and we want to refer to them in <code>test_dna.py</code> file, we need to <em>import</em> them. We can do this as,</p>
+<pre><code>from dna import calculate_weight
+from dna import NUCLEOTIDES</code></pre>
+<p>Then we can add all our test functions and function calls to this file. And run the tests,</p>
+<pre><code>$ python test_dna.py</code></pre>
+<h2 id="nose---a-python-test-framework"><code>nose</code> - a Python test framework</h2>
+<p><code>nose</code> is a test framework for Python that will automatically find, run and report on tests written in Python. It is an example of what has been termed an <em><a href="http://en.wikipedia.org/wiki/XUnit">xUnit test framework</a></em>, perhaps the most famous being JUnit for Java.</p>
+<p>To use <code>nose</code>, we write test functions, as we've been doing, with the prefix <code>test_</code> and put these in files, likewise prefixed by <code>test_</code>. The prefixes <code>Test-</code>, <code>Test_</code> and <code>test-</code> can also be used.</p>
+<p>Typically, a test function,</p>
+<ul>
+<li>Sets up some inputs and the associated expected outputs. The expected outputs might be a single number, a range of numbers, some text, a file, a set of files, or whatever.</li>
+<li>Runs the function or component being tested on the inputs to get some actual outputs.</li>
+<li>Checks that the actual outputs match the expected outputs. We use assertions as part of this checking. We can check both that conditions hold and that conditions do not hold.</li>
+</ul>
+<p>So, we could rewrite <code>test_a</code>, as the more, verbose, but equivalent,</p>
+<pre><code>def test_a():
+    expected = NUCLEOTIDES[&#39;A&#39;]
+    actual = calculate_weight(&#39;A&#39;)                     
+    assert expected == actual</code></pre>
+<p>Python <code>assert</code> allows us to check,</p>
+<pre><code>assert should_be_true()
+assert not should_not_be_true()</code></pre>
+<p><code>nose</code> defines additional functions which can be used to check for a rich range of conditions e.g..</p>
+<pre><code>from nose.tools import *
+
+assert_equal(a, b)
+assert_almost_equal(a, b, 3)
+assert_true(a)
+assert_false(a)
+assert_raises(exception, func, *args, **kwargs)
+...</code></pre>
+<p><code>assert_raises</code> is used for where we want to test that an exception is raised if, for example, we give a function a bad input.</p>
+<p>To run <code>nose</code> for our tests, we can do,</p>
+<pre><code>$ nosetests test_dna.py</code></pre>
+<p>Each <code>.</code> corresponds to a successful test. And to prove <code>nose</code> is finding our tests, let's remove the function calls from <code>test_dna.py</code> and try again,</p>
+<pre><code>$ nosetests test_dna.py</code></pre>
+<p>nosetests can output an &quot;xUnit&quot; test report,</p>
+<pre><code>$ nosetests --with-xunit test_dna.py
+$ cat nosetests.xml</code></pre>
+<p>This is a standard format that that is supported by a number of xUnit frameworks which can then be converted to HTML and presented online.</p>
+<h2 id="write-some-more-tests">Write some more tests</h2>
+<p>Let's spend a few minutes coming up with some more tests for <code>calculate_weight</code>. Consider,</p>
+<ul>
+<li>What haven't we tested for so far?</li>
+<li>Have we covered all the nucleotides?</li>
+<li>Have we covered all the types of string we can expect?</li>
+<li>In addition to test functions, other types of runtime test could we add to <code>calculate_weight</code>?</li>
+</ul>
+<p>Examples of tests we could add include,</p>
+<ul>
+<li><code>calculate_weight('T')</code></li>
+<li><code>calculate_weight('C')</code></li>
+<li><code>calculate_weight('TC')</code></li>
+<li><code>calculate_weight(123)</code></li>
+</ul>
+<p>The latter requires us to check whether an exception was raised which we can do as follows:</p>
+<pre><code>try:
+    calculate_weight(123) 
+    assert False
+except ValueError:
+    assert True</code></pre>
+<p>This is like catching a runtime error. If an exception is raised then our test passes (<code>assert True</code>), else if no exception is raised, it fails. Alternatively, we can use <code>assert_raises</code> from <code>nose</code>,</p>
+<pre><code>from nose.tools import assert_raises
+
+def test_123():
+    assert_raises(ValueError, calculate_weight, 123)</code></pre>
+<p>The assert fails if the named exception is <em>not</em> raised.</p>
+<p>One other test we could do is <code>calculate_weight('GATCX')</code> for which we can add another runtime test,</p>
+<pre><code>    ...
+except KeyError:
+    raise ValueError(&#39;The input is not a sequence of G,T,C,A&#39;)</code></pre>
+<p>Previous: <a href="README.md">Testing</a> Next: <a href="RealWorld.md">Testing in practice</a></p>
+</body>
+</html>
