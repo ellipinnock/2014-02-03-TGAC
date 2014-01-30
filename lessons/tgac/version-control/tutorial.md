@@ -1,7 +1,9 @@
 --- 
 layout: lesson 
 root: ../../.. 
-title: Version Control  
+github_username: apawlik
+bootcamp_slug: 2014-02-03-TGAC
+title: Version control with Git  
 ---
 
 **Based on materials by Mike Jackson, Greg Wilson, Chris Cannam, Katy
@@ -49,7 +51,8 @@ two types: centralized and distributed version control. An example of
 the former is Subversion (SVN) and of the latter is
 [Git](http://git-scm.com/). Centralized version control has one main
 repository (on a server) whilst in the case of distributed version
-control everyone has their own (local) repository. \
+control everyone has their own (local) repository. 
+
  For this session, we'll be using Git, a popular version control system
 and [GitHub](http://github.com), a web-based service providing remote
 repositories.
@@ -66,7 +69,8 @@ filesystem (local machine).
 
 We will be working with a simple example in this tutorial. It will be a
 paper that we will first start writing as a single author and then work
-on it further with one of our colleagues. \
+on it further with one of our colleagues. 
+
  First, let's create a directory:
 
      
@@ -79,7 +83,8 @@ Now, we need to set up this directory up to be a Git repository (or
        $ git init
     Initialized empty Git repository in /home/user/papers/.git/
 
-The directory "papers" is now our working directory. \
+The directory "papers" is now our working directory. 
+
  If we look in this directory, we'll find a *.git* directory:
 
       $ ls -a
@@ -151,16 +156,19 @@ Information about what Git knows about the file is displayed. For now,
 the important bit of information is that our file is listed as Untracked
 which means it's in our working directory but Git is not tracking it -
 that is, any changes made to this file will not be recorded by Git. To
-tell Git about the file, we first need to add it to Git's staging area,
-which is also known as the index or the cache.
+tell Git about the file, we will use the *add* command:
 
     $ git add journal.txt
     $ git status journal.txt
+    
+Now, our file is now listed as one of some Changes to be committed. 
+    
+*git add* is used for two purposes. Firstly, to tell Git that a given file should be tracked. Secondly, to put the file into the Git's **staging area** which is also known as the index or the cache. 
 
-Now, our file is now listed as one of some Changes to be committed. The
-staging area can be viewed as a "loading dock", a place to hold files
+The staging area can be viewed as a "loading dock", a place to hold files
 we've added, or changed, until we're ready to tell Git to record those
-changes in the repository. \
+changes in the repository.  
+
  In order to tell Git to record our change, our new file, into the
 repository, we need to commit it:
 
@@ -171,12 +179,16 @@ figure out that directories and files are committed, and who by (thanks
 to the information we provided before) and even, what changes were made,
 but it cannot figure out why. So we need to provide this in a commit
 message. So let's type in a message. "Initial structure and headings for
-the journal paper." \
+the journal paper." 
+
+
+
  Ideally, commit messages should have meaning to others who may read
 them - or you 6 months from now. Messages like "made a change" or "added
 changes" or "commit 5" aren't that helpful (in fact, they're
 redundant!). A good commit message usually contains a one-line
-description followed by a longer explanation, if necessary. \
+description followed by a longer explanation, if necessary. 
+
  If we save our commit message, Git will now commit our file.
 
      [master (root-commit) c381e68] This is my journal paper.
@@ -185,7 +197,8 @@ description followed by a longer explanation, if necessary. \
 
 This output shows the number of files changed and the number of lines
 inserted or deleted across all those files. Here, we've changed (by
-adding) 1 file and inserted 9 lines. \
+adding) 1 file and inserted 9 lines. 
+
  Now, if we look at its status,
 
     $ git status journal.txt
@@ -194,7 +207,8 @@ adding) 1 file and inserted 9 lines. \
 
 nothing to commit means that our file is now in the repository, our
 working directory is up-to-date and we have no uncommitted changes in
-our staging area. \
+our staging area. 
+
  To see the history of changes that we made to our repository (the most
 recent changes will be displayed at the top):
 
@@ -202,13 +216,14 @@ recent changes will be displayed at the top):
 
 The output shows: the commit identifier (also called revision number)
 which uniquely identifies the changes made in this commit, author, date,
-and your comment. \
+and your comment. 
+
  Now let's make some more changes to our journal.txt file . If we now
 run,
 
      $ git status journal.txt
 
-we see a Changes not staged for commit section and our file is marked as
+we see changes not staged for commit section and our file is marked as
 modified. This means that a file Git knows about has been modified by us
 but has not yet been committed. So we can add it to the staging area and
 then commit the changes:
@@ -216,9 +231,10 @@ then commit the changes:
      
     $ git add journal.txt
     $ git commit
+    
+Note that in this case we used "git add" to put journal.txt to the staging area. Git already knows this file should be tracked but doesn't know if we want to commit the changes we made to the file  in the repository and hence we have to add the file to the staging area. 
 
-It can sometimes be quicker to provide our commit messages at the
-command-line by doing:
+It can sometimes be quicker to provide our commit messages at the command-line by doing:
 
     $ git add journal.txt
     $ git commit -m "Added subsection headings." 
@@ -228,11 +244,16 @@ we may want to reuse:
 
     $ mkdir common
     $ nano common/references.txt
-
-And add a reference to this:
+    
+We will also add a few lines to our paper (journal.txt). Now we need to record our work in the repository so we need to make a commit.
+First we tell Git to track the references. We can actually tell Git to track everything in the given subdirectory:
 
     $ git add common
-    $ git commit -m "Added common directory and references file with Cohen et al reference"
+
+All files that are in "common" are now tracked.
+We would also have to add journal.txt to the staging area. But there is a shortcut. We can use option "-a" for "commit". This option means "commit all files that are tracked and that have been modified".
+
+    $ git commit -ma "Added common directory and references file with Cohen et al reference and described data in the paper"
 
 and Git will add, then commit, both the directory and the file.
 
@@ -272,15 +293,18 @@ We will get something like this:
 
     HEAD is now at c4354a9... Added sections
 
-HEAD is essentially a pointer which points to the branch where you
-currently are. We said previously that master is the default branch. But
-master is essentially a pointer - that points to the tip of the master
-branch (the sequence of commits that is created by default by Git). When
-we checked out one of the past commits HEAD is pointing to that commit
+*HEAD* is essentially a pointer which points to the branch where you
+currently are. We said previously that *master* is the default branch. But
+*master* is actually a pointer - that points to the tip of the master
+branch (the sequence of commits that is created by default by Git). You may think of *master* as two things: one as a pointer and one as the default branch. 
+
+When we checked out one of the past commits HEAD is pointing to that commit
 but does not point to the same thing as master any more. That is why git
-says You are in 'detached HEAD' state. and advises us that if we want to
+says You are in 'detached HEAD' state and advises us that if we want to
 make a commit now, we should create a new branch to retain these
-commits. If we created a new commit without creating a new branch Git
+commits. 
+
+If we created a new commit without creating a new branch Git
 would not know what to do with it (since there is already a commit in
 master branch from the current state which we checked out c4354a...). We
 will get back to branches and HEAD pointer later in this tutorial. \
@@ -303,13 +327,15 @@ And common will be there once more,
 
 So we can get any version of our files from any point in time. In other
 words, we can set up our working directory back to any stage it was when
-we made a commit.\
-\
- **Top tip: Commit often** \
+we made a commit.
+
+ **Top tip: Commit often** 
+ 
  In the same way that it is wise to frequently save a document that you
 are working on, so too is it wise to save numerous revisions of your
 files. More frequent commits increase the granularity of your "undo"
-button. \
+button. 
+
  While DropBox and GoogleDrive also preserve every version, they delete
 old versions after 30 days, or, for GoogleDrive, 100 revisions. DropBox
 allows for old versions to be stored for longer but you have to pay for
@@ -344,7 +370,7 @@ Branching
 
 You might have noticed the term branch in status messages,
 
-     $ git status journal.txt
+    $ git status journal.txt
     # On branch master
     nothing to commit (working directory clean)
 
@@ -356,18 +382,18 @@ repository, we used,
 Not only can our repository store the changes made to files and
 directories, it can store multiple sets of these, which we can use and
 edit and update in parallel. Each of these sets, or parallel instances,
-is termed a branch and master is Git's default branch. \
-\
+is termed a branch and master is Git's default branch. 
+
  A new branch can be created from any commit. Branches can also be
-merged together. \
-\
+merged together. 
+
  Why is this useful? Suppose we've developed some software and now we
 want to add some new features to it but we're not sure yet whether we'll
 keep them. We can then create a branch 'feature1' and keep our master
 branch clean. When we're done developing the feature and we are sure
 that we want to include it in our program, we can merge the feature
-branch with the master branch. \
- \
+branch with the master branch. 
+ 
  We create our branch for the new feature.
 
     -c1---c2---c3                               master
@@ -423,12 +449,15 @@ For example,
      |                   /
      c5---c11---c12---c14---c19                       kate
 
-If a bug is found by a user, a bug fix can be applied to the release
-branch, and then merged with the master branch. When a feature or
-developer-specific branch, is stable and has been reviewed and tested it
-can be merged with the master branch. When the master branch has been
+
+There are different possible workflows when using Git for code development. 
+
+One of the examples may be when the master branch holds stable and tested code.  If a bug is found by a user, a bug fix can be applied to the release branch, and then merged with the master branch. 
+When a feature or developer-specific branch, is stable and has been reviewed and tested it can be merged with the master branch. When the master branch has been
 reviewed and tested and is ready for release, a new release branch can
 be created from it.
+If you want to learn more about workflows with Git, have a look at the [AstroPy development workflow](http://astropy.readthedocs.org/en/latest/development/workflow/development_workflow.html).
+
 
 ### Branching in practice
 
@@ -448,7 +477,7 @@ practice to check whether we're working in the correct branch.
     * paperWJohn
       master
 
-The \* indicates which branch we're currently in. Let's commit. If we
+The * indicates which branch we're currently in. Let's commit. If we
 want to work now in our master branch. We can switch by using:
 
     $ git checkout master 
@@ -470,7 +499,8 @@ changes.
 After some discussions with John we decided that there is going to be a
 major change to our plan. We will publish together. And hence it makes
 sense now to merge all that was authored together with John in branch
-"paperWJohn". \
+"paperWJohn". 
+
  We can do that by *merging* that branch with the master branch. Let's
 try doing that:
 
@@ -502,7 +532,7 @@ Let's look inside journal.txt:
     <<<<<<< HEAD 
     Title: A paper about proteines
     =======
-    Title: A paper everything but proteines
+    Title: A paper about everything but proteines
     >>>>>>> 71d34decd32124ea809e50cfbb7da8e3e354ac26 
 
 The mark-up shows us the parts of the file causing the conflict and the
@@ -514,7 +544,7 @@ resolve the conflict. This means removing the mark-up and doing one of:
 -   Keep the remote version, which, here, is the one marked-up by the
     commit identifier i.e. "Title: A paper everything but proteines"
 -   Or keep a combination of the two e.g. "Title: A paper about
-    proteines and eveything else"
+    proteines and everything else"
 
 We edit the file. Then commit our changes e.g.
 
@@ -534,8 +564,7 @@ we want to.
 
 ### GitHub
 
-[GitHub](http://GitHub.com) is a web service which allows users to set
-up their private and public source code Git repositories. It provides
+[GitHub](http://GitHub.com) is a GitHub is a web-based hosting service which allows users to set up their private and public source code Git repositories. It provides
 tools for browsing, collaborating on and documenting code. Your
 organisation may also offer support for hosting Git repositories - ask
 your local system administrator. GitHub, like other services such
@@ -553,10 +582,10 @@ support projects including:
 -   Varying permissions for various groups of users
 -   Other service hooks e.g. to Twitter.
 
-**Note** GitHub's free repositories have public licences **by default**.
+**Note** 
+GitHub's free repositories have public licences **by default**.
 If you don't want to share (in the most liberal sense) your stuff with
-the world and you want to use GitHub (instead of GitHub), you will need
-to pay for the private GitHub repositories (GitHub offers up to 5 free
+the world and you want to use GitHub (instead of for exmple, BitBucket), you will need to pay for the private GitHub repositories (GitHub offers up to 5 free
 private repositories, if you are an academic - but do check this
 information as terms and conditions may change).
 
@@ -566,7 +595,7 @@ Now, we can create a repository on GitHub,
 
 -   Log in to GitHub (if you don't have an account, set up one)
 -   Click on the Create icon on the top right
--   Enter Repository name: "2014-01-Man-YOURNAME"
+-   Enter Repository name: "2014-02-TGAC-YOURNAME"
 -   For the purpose of this exercise we'll create a public repository
 -   Make sure the Initialize this repository with a README is unselected
 -   Click Create Repository
@@ -574,11 +603,12 @@ Now, we can create a repository on GitHub,
 You'll get a page with new information about your repository. We already
 have our local repository and we will be pushing it to GitHub.
 
-    git remote add origin https://github.com/USERNAME/2014-01-Man-YOURNAME.git
+    git remote add origin https://github.com/USERNAME/2014-02-TGAC-YOURNAME.git
     git push -u origin master
 
 This sets up an alias, origin, to correspond to the URL of our new
-repository on GitHub. \
+repository on GitHub. 
+
  Now copy and paste the second line
 
     $ git push -u origin master
@@ -587,16 +617,16 @@ repository on GitHub. \
     Compressing objects: 100% (30/30), done.
     Writing objects: 100% (38/38), 3.59 KiB, done.
     Total 38 (delta 9), reused 0 (delta 0)
-    To https://github.com/USERNAME/2014-01-Man-YOURNAME.git
+    To https://github.com/USERNAME/2014-02-TGAC-YOURNAME.git
     * [new branch]      master -> master
     Branch master set up to track remote branch master from origin.
 
 This pushes our master branch to the remote repository, named via the
-alias origin and creates a new master branch in the remote repository. \
- \
+alias origin and creates a new master branch in the remote repository. 
+
  Now, on GitHub, we should see our code and click the Commits tab we
-should see our complete history of commits. \
- \
+should see our complete history of commits. 
+
  Our local repository is now available on GitHub. So, anywhere we can
 access GitHub, we can access our repository.
 
@@ -610,18 +640,18 @@ Now, let's do something drastic!
 We've just wiped our local repository! But, as we've a copy on GitHub we
 can just copy, or clone that,
 
-    $ git clone https://USERNAME@github.com/USERNAME/2014-01-Man-YOURNAME.git
-    Cloning into '2014-01-Man-YOURNAME'...
+    $ git clone https://USERNAME@github.com/USERNAME/2014-02-TGAC-YOURNAME.git
+    Cloning into '2014-02-TGAC-YOURNAME'...
     Password for 'https://USERNAME@github.com':
     remote: Counting objects: 12, done.
     remote: Compressing objects: 100% (4/4), done.
     remote: Total 12 (delta 0), reused 0 (delta 0)
     Unpacking objects: 100% (12/12), done.
 
-Now, if we change into "2014-01-Man-YOURNAME" we can see that we have
+Now, if we change into "2014-02-TGAC-YOURNAME" we can see that we have
 our repository,
 
-    $ cd 2014-01-Man-YOURNAME
+    $ cd 2014-02-TGAC-YOURNAME
     $ git log
 
 and we can see our Git configuration files too,
@@ -635,14 +665,16 @@ directory that held our local repository but was not a part of it.
 ### Push changes to a remote repository
 
 We can use our cloned repository just as if it was a local repository so
-let's make some changes to our files and commit these. \
+let's make some changes to our files and commit these. 
+
  Having done that, how do we send our changes back to the remote
 repository? We can do this by pushing our changes,
 
     $ git push
 
 If we now check our GitHub page we should be able to see our new
-changes. \
+changes. 
+
  Before you push to a remote repository you should always pull so you
 have the most up-to-date copy of the remote repository. So, on that
 note...
@@ -652,15 +684,17 @@ note...
 We'll work in pairs now. Find a partner and clone each other's
 repositories. Now each one of you should make some changes to the
 "journal.txt" in *your* repository and push it to GitHub. How to get
-your partner's latest changes now in the cloned repository? \
+your partner's latest changes now in the cloned repository? 
+
  One way is simply to clone the repository every time but this is
 inefficient, especially if our repository is very large. So, Git allows
 us to get the latest changes down from a repository by *pullling* them.
-\
+
+
  To get the partner's changes, go to the repository you cloned from
 their GitHub account:
 
-     $cd 2014-01-Man-YOUR-PARTNERS-NAME
+     $cd 2014-02-TGAC-YOUR-PARTNERS-NAME
 
 And pull the changes
 
@@ -683,8 +717,8 @@ We've seen how we can use version control to,
 Version control serves as a log book for your software and documents,
 ideas you've explored, fixes you've made, refactorings you've done,
 false paths you've explored - what was changed, who by, when and why -
-with a powerful undo and redo feature! \
- \
+with a powerful undo and redo feature! 
+
  It also allows you to work with others on a project, whether that be
 writing code or papers, down to the level of individual files, without
 the risk of overwriting and losing each others work, and being able to
@@ -705,3 +739,6 @@ record and understand who changed what, when, and why.
     host your own multi-user Git repositories. Your collaborators send
     you their public SSH keys then they can pull and push from/to the
     repositories.
+    
+
+[Back to main page](../../../index.html)
