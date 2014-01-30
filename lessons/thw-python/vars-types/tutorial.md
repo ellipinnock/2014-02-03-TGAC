@@ -1,25 +1,23 @@
 ---
 layout: lesson
 root: ../../..
-title: The Basics of Python
+github_username: apawlik
+bootcamp_slug: 2014-02-03-TGAC
+title: Variables and data types
 ---
 **Based on materials by: Milad Fatenejad, Katy Huff, Tommy Guy, Joshua R. Smith, Will Trimble, and many more**
 
 ## Introduction
 
-This lecture is on basic programming in python. In order to do the
-examples, we are going to use an environment called IPython notebook.
-I expect this lecture to be interactive, so stop me at any point if
-you have questions. The correct power dynamic is that people are the
-masters and the machines are servants. The computer is a hammer; it
-exists to help us get things done.  We can hammer nails with the
-handle, with the claw of the hammer; some of us even hammer nails with
-bricks.  But when you learn what part of the hammer works best with
+This lecture is on basic programming in Python. In order to do the
+examples, we are going to use an environment called IPython Notebook. IPython Notebook uses files with *.ipynb extension. 
+
+The correct power dynamic is that people are the masters and the machines are servants. The computer is a hammer; it exists to help us get things done.  We can hammer nails with the handle, with the claw of the hammer; some of us even hammer nails with bricks.  But when you learn what part of the hammer works best with
 nails, and have some experience swinging it, you spend less time
 worrying about the hammering and more time worrying about your
 furniture.
 
-So now would be a good time to roll out [PEP 20, The Zen of Python] (http://www.python.org/dev/peps/pep-0020/)
+So now would be a good time to roll out [PEP 20, The Zen of Python] (http://www.Python.org/dev/peps/pep-0020/)
 
 > Beautiful is better than ugly.
 > Explicit is better than implicit.
@@ -42,29 +40,23 @@ So now would be a good time to roll out [PEP 20, The Zen of Python] (http://www.
 > Namespaces are one honking great idea -- let's do more of those!
 
 This lecture will be structured as follows: I will be teaching the
-basics of two things: the python programming language (to a greater
-extent) and the ipython interpreter (to a lesser extent). The ipython
-interpreter is one of many different ways to implement python code. As
-far as the python component, I'll shoot for a layered approach: I'l
-continue building on my previous concepts. It turns out that like any
-sufficiently complex topic, its not really possible to force the
-pedagogy into a serial stream. Also, we have a pretty serious time
-constraint. I'm just going to drop it on you. Because of the brief
-nature of this tutorial, I've included links to some excellent
-reference material. Also, if we have time, I'll take questions based
-on the specific programming needs of this class.
+basics of two things: the Python programming language (to a greater
+extent) and the IPython interpreter (to a lesser extent). The IPython
+interpreter is one of many different ways to implement Python code. 
+
+We have a pretty serious time constraint.  Because of the brief nature of this tutorial, I've included links to some excellent reference material. Also, if we have time, I'll take questions based on the specific programming needs of this class.
 
 Here is the reference material.
 
-* [Dive into Python] (http://www.diveintopython.net/toc/index.html)
-* [Software Carpentry's Python Lectures] (http://software-carpentry.org/4_0/python/)
+* [Dive into Python] (http://www.diveintoPython.net/toc/index.html)
+* [Software Carpentry's Python Lectures] (http://software-carpentry.org/4_0/Python/)
 * [IPython: A System for Interactive Scientific Computing] (http://dx.doi.org/10.1109/MCSE.2007.53)
-* [How to Think Like a Computer Scientist] (http://www.greenteapress.com/thinkpython/thinkpython.html)
+* [How to Think Like a Computer Scientist] (http://www.greenteapress.com/thinkPython/thinkPython.html)
 
-Once we briefly deal with ipython, I'll cover python in the following order:
 
-## What I'll cover
-### Lesson 1
+
+## Contents
+### Variables and data types
 * print statements
 * variables
 * integers
@@ -74,36 +66,36 @@ Once we briefly deal with ipython, I'll cover python in the following order:
 * type coersion
 * basic operations: add numbers, concatenate strings, basic data type functionality
 
-### Lesson 2
+### Data structures
 * list
 * dictionary 
 * set 
 * tuple
 * file reading
 
-### Lesson 3
+### Flow control
 * for loop
 * conditional (if) statements
 * while loops
 * iteration
 * writing to files
 
-### Lesson 4
+### Functions and modules
 * methods
 * modules
 
-## IPython
+## IPython and IPython Notebook
 
-You can run python commands in a handful of ways; you can create
-executable scripts, you can run the python interpreter, you can run
-IPython, or you can run IPython notebook.  IPython is an alternative
+You can run Python commands in a handful of ways; you can create
+executable scripts, you can run the Python interpreter, you can run
+IPython, or you can run IPython Notebook.  IPython is an alternative
 to the built-in Python interpreter with some nice features.  IPython
-notebook gives you interactive access to the python interpreter from
+Notebook gives you interactive access to the Python interpreter from
 within a browser window, and it allows you to save your commands as a
 "notebook".  Lets give the built-in interpreter a spin just this once.
 
 ```
-swc@swc:~$ python
+swc@swc:~$ Python
 Python 2.7.3 (default, Apr 20 2012, 22:44:07) 
 [GCC 4.6.3] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
@@ -112,20 +104,20 @@ hello world
 >>> quit() 
 ```
 
-We can also write python commands in a file and execute them from the
+We can also write Python commands in a file and execute them from the
 command line. You will notice that the print command above is located
 in the file hello.py. Execute the following command at the command
 line
 
 ```
-swc@swc:~$ python hello.py
+swc@swc:~$ Python hello.py
 ```
 
 IPython has more useful features for interactive use than the standard
-python interpreter, so we'll use it from here on out.
+Python interpreter, so we'll use it from here on out.
 
 ```python
-swc@swc:~$ ipython notebook
+swc@swc:~$ iPython notebook
 In [1]: print "hello world"
 hello world
 In [2]: 
@@ -148,7 +140,7 @@ In [3]:
 
 ### Pasting
 
-You can paste things into the ipython console by copying text from
+You can paste things into the iPython console by copying text from
 your machine with **ctrl+c** and typing **%paste** at the IPython
 prompt.
 
@@ -196,16 +188,15 @@ In [1] %run hello.py
 
 ### Clearing IPython
 
-To clear everything from IPython, use the reset command.
+To clear everything from IPython and IPython Notebook, use the reset command.
 
 ```python
 In [1] reset
-Once deleted, variables cannot be recovered. Proceed (y/[n])?
 ```
 
 ## Variables
 
-All programming languages have variables, and python is no
+All programming languages have variables, and Python is no
 different. To create a variable, just name it and set it with the
 equals sign. One important caveat: variable names can only contain
 letters, numbers, and the underscore character. Lets set a variable.
@@ -226,7 +217,7 @@ In [5]: print voltage, current
 
 ## Types and Dynamic Typing
 
-Like most programming languages, things in python are typed. The type
+Like most programming languages, things in Python are typed. The type
 refers to the type of data. We've already defined three different
 types of data in experiment, voltage, and current. The types are
 string, integer, and float. You can inspect the type of a variable by
@@ -250,10 +241,10 @@ seem esoteric and pedantic. Its actually important, but its importance
 may not be clear to you until long after this class is over.
 
 Dynamic typing means that you don't have to declare the type of a
-variable when you define it; python just figures it out based on how
+variable when you define it; Python just figures it out based on how
 you are setting the variable. Lets say you set a variable. Sometime
 later you can just change the type of data assigned to a variable and
-python is perfectly happy about that. Since it won't be obvious until
+Python is perfectly happy about that. Since it won't be obvious until
 (possibly much) later why that's important, I'll let you marinate on
 that idea for a second.
 
@@ -275,7 +266,7 @@ In [11]: type(voltage)
 Out[11]: <type 'float'>
 ```
 
-You can even now assign a string to the variable voltage and python
+You can even now assign a string to the variable voltage and Python
 would be happy to comply.
 
 ```python
@@ -377,9 +368,7 @@ This point becomes important when we start operating on data in the next section
 ## Data Operations
 
 In this section all of the discussion in the previous section becomes
-important. I don't know if I'd call this stuff fundamental to the
-language, but its pretty important and it will zing you if you aren't
-careful. The takeaway is that you need to be precise with what you are
+important.   The takeaway message is that you need to be precise with what you are
 doing. Lets say you want to add some integers.
 
 ```python
@@ -487,8 +476,8 @@ In [63]: print fullName
 Johann Gambolputty
 ```
 
-There are other operations deined on string data. Use the dir comnand
-to find them. One example I'll show is the upper method. Lets take a
+There are other operations deined on string data. Use the dir command
+to find them. One example I'll show is the upper method. Let's take a
 look at the documentation.
 
 ```python
@@ -499,7 +488,6 @@ String Form:    <method 'upper' of 'str' objects>
 Namespace:      Python builtin
 Docstring:
     S.upper() -> string                                                                                                                        
-    
     Return a copy of the string S converted to uppercase.
 ```
 
@@ -510,11 +498,10 @@ In [65]: fullName.upper()
 Out[65]: 'JOHANN GAMBOLPUTTY'
 ```
 
-You have to use the parenthesis at the end because upper is a method
+You have to use the parenthesis at the end because upper() is a method
 of the string class.
 
-For what its worth, you don't need to have a variable to use the
-upper() method, you could use it on the string itself.
+You don't need to have a variable to use the upper() method, you could use it on the string itself.
 
 ```python
 In [66]: "Johann Gambolputty".upper()
@@ -523,6 +510,9 @@ Out[66]: 'JOHANN GAMBOLPUTTY'
 
 What do you think should happen when you take upper of an int?  What about a string representation of an int?
 
-That wraps up this lesson. We tried out the IPython shell and got some
-experience with ints, floats, and strings. Along the way we talked
-about some philosophy and how programming is about people.
+That wraps up this lesson. We tried out the IPython shell, IPython Notebook and got some experience with ints, floats, and strings. 
+
+Next: [Data structures](../data-structures/tutorial.html)
+
+
+[Back to main page](../../../index.html)

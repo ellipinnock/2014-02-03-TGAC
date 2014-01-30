@@ -7,7 +7,7 @@ title: Python Functions and Modules
 
 Computers are very useful for doing the same operation over and over. When you know you will be performing the same operation many times, it is best to encapsulate this similar code into a function or a method. Programming functions are related to mathematical functions, e.g. f(x), and it is helpful to think of them as abstract operators that produce output given some input. Let's look at some examples to solidify this concept.
 
-#Built-in string methods
+##Built-in string methods
 
 The base distribution comes with many useful functions. When a function is a property of, or owned by, on a specific type (ints, floats, lists, strings, dictionaries, etc.) it is called a method. First let's look at some basic string methods since they are very useful for reading data into Python.
 
@@ -49,7 +49,7 @@ Check your work:
 
 	round(gc, ndigits = 2) == .47
 
-#Creating your own functions!
+##Creating your own functions!
 
 When there is not an available function to perform a task, you can write your own functions. Ths simplest functions have the following format in Python:
 
@@ -125,7 +125,7 @@ Note that when you return multiple values you may unpack these into individual v
 	both = quorem(42, 16)
 	print both
 
-#Keyword Arguments
+##Keyword Arguments
 
 In Python, functions also support default values for arguments. Arguments with an associated default are called keyword arguments. If this function is then called without one of these arguments being present the default value is used. All keyword arguments must come after normal arguments in the function definition:
 
@@ -168,7 +168,7 @@ Warning: be careful with mutable containers as default values. The container wil
 	add_to_list(16)
 	add_to_list(65)
 
-#Packing & Unpacking Arguments
+##Packing & Unpacking Arguments
 
 Say that you have a list or tuple of values that you would like to call a function with. You might be tempted to do the following:
 
@@ -232,7 +232,7 @@ So the most general function signature that you can define is:
 
 	func()  # try me out!
 
-#Recursion
+##Recursion
 
 One of the greatest features of functions is that they may call themselves from within their own bodies! This is known as recursion.
 
@@ -261,7 +261,7 @@ One of the most famous recursive sequences is the Fibonacci sequence. This can b
 
 	fib(10)
 
-#Decorators
+##Decorators
 
 In Python, functions are first class objects. This means that anything any other variable can do, a function can also do. This is because they are normal variables in the language.
 
@@ -329,7 +329,7 @@ Python also has a shortcut for using decorators which preserve the same name. Th
 
 For more advanced users, the standard library functools module has some really powerful and great utilities. This includes the functools.wraps() function.
 
-#Lambdas
+##Lambdas
 
 Lambdas are small, single expression functions that are anonymous (they have no name). They come from functional programming languages and the Lambda Calculus. Since they are so small they may be written on a single line.
 
@@ -360,7 +360,7 @@ Check your work:
 	print round(calculate_gc('AGCGTCGTCAGTCGT'), ndigits = 2) == 0.60
 	print round(calculate_gc('ATaGtTCaAGcTCgATtGaATaGgTAaCt'), ndigits = 2) == 0.34
 
-#Modules
+##Modules
 
 Python has a lot of useful data type and functions built into the language, some of which you have already seen. For a full list, you can type dir(__builtins__). However, there are even more functions stored in modules. An example is the sine function, which is stored in the math module. In order to access mathematical functions, like sin, we need to import the math module. Lets take a look at a simple example:
 

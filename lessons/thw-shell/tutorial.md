@@ -15,7 +15,7 @@ with a keyboard instead of controlling graphical user interfaces
 (GUIs) with a mouse/keyboard combination.
 
 Use a browser to open the tutorial on github, located at:
-    http://github.com/{{page.github_username}}/{{page.bootcamp_slug}}
+[http://github.com/{{page.github_username}}/{{page.bootcamp_slug}}](http://github.com/{{page.github_username}}/{{page.bootcamp_slug}})
 
 Click on the directory named `shell`.
 
@@ -911,26 +911,6 @@ Redo exercise 4, except rename only the files which do not already end
 in `.txt`. You will have to use the `man` command to figure out how to
 search for files which do not match a certain name. 
 
-* * * * 
 
-### Bonus:
 
-**backtick, xargs**: Example find all files with certain text
 
-**alias** -> rm -i
-
-**variables** -> use a path example
-
-**.bashrc**
-
-**du**
-
-**ln**
-
-**ssh and scp**
-
-**regular expressions**
-
-**permissions**
-
-**chaining commands together**
