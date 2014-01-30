@@ -1,27 +1,18 @@
 ---
 layout: lesson
 root: ../../..
+github_username: apawlik
+bootcamp_slug: 2014-02-03-TGAC
 title: Flow Control in Python
 ---
 **Based on materials by Milad Fatenejad and Katy Huff**
 
-Pasting into IPython
-====================
 
-This part of the lesson includes a lot of text, but it will be useful to
-run it yourself in IPython.
+*The IPython Notebook file and the sample data files for this tutorial can be found in the course materials:* 
 
-To paste text from another application (i.e. these lecture notes) into
-IPython :
+	{{page.bootcamp_slug}}/lessons/thw-python/flow-control
 
-1.  select text from the wiki
-2.  copy with **ctrl+c**
-3.  in IPython, type `%paste`
 
-The code should paste and execute in IPython.
-
-If you also type %autocall to turn autocall OFF, you may be able to
-paste with **ctrl+v** though this won't work with all IPython builds.
 
 Conditionals
 ============
@@ -44,8 +35,8 @@ i>=j # i is greater than or equal to j : FALSE
 i!=j # i is not equal to j : TRUE
 ```
 
-However, python has other equivalence test statements that are fairly
-unique to python. To check whether an object is contained in a list :
+However, Python has other equivalence test statements that are fairly
+unique to Python. To check whether an object is contained in a list :
 
 ```python
 beatle="John"
@@ -88,7 +79,7 @@ dict1["thing_widths"][0] = 222
 print dict1, dict2
 ```
 
-Conditionals (`if` statements) are also really easy to use in python. Take
+Conditionals (`if` statements) are also really easy to use in Python. Take
 a look at the following example:
 
 ```python
@@ -118,7 +109,7 @@ functions or classes.
 **Aside: Compact if-statement:**
 
 Python has an easy to use `if`-syntax for setting the value of a variable.
-Try entering this into IPython:
+Try entering this into IPython Notebook:
 
 ```python
 i = 5
@@ -203,8 +194,8 @@ together. I'll use some of the concepts we already saw and introduce a
 few new concepts. To run the example, you'll need to locate a short file
 containing phone numbers. The file can be found in your 
 repository within the phonenums directory and is called phonenums.txt. 
-Now we have to move IPython to that directory so it can find the
-phonenums.txt file. You navigate within IPython in the same way that you
+Now we have to move IPython Notebook to that directory so it can find the
+phonenums.txt file. You navigate within IPython Notebook  in the same way that you
 navigate in the shell, by entering "cd [path]" .
 
 This example opens a text file containing a list of phone numbers. The
@@ -241,3 +232,9 @@ other words, the goal is to write a loop that prints:
     773 3
 
 This example is a little tricky to figure out, but give it a shot.
+
+Next: [Functions and modules](../functions-and-modules/tutorial.html)
+
+Previous: [Data structures](../data-structures/tutorial.html)
+
+[Back to main page](../../../index.html)

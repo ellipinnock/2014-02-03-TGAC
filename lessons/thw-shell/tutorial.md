@@ -153,10 +153,10 @@ with a star.
 This directory contains all of the material for this boot camp. Now
 move to the directory containing the data for the shell tutorial:
 
-    cd shell
+    cd lessons/thw-shell
 
 If you enter the `cd` command by itself, you will return to the home
-directory. Try this, and then navigate back to the `shell`
+directory. Try this, and then navigate back to the `thw-shell`
 directory.
 
 ### Arguments
@@ -195,14 +195,14 @@ command:
 This will list the contents of the `{{page.bootcamp_slug}}` directory without
 you having to navigate there. Now enter:
 
-    ls {{page.bootcamp_slug}}/shell
+    ls {{page.bootcamp_slug}}/lessons/thw-shell
 
-This prints the contents of `shell`. The `cd` command works in a
+This prints the contents of `thw-shell`. The `cd` command works in a
 similar way. Try entering:
 
-    cd {{page.bootcamp_slug}}/shell
+    cd {{page.bootcamp_slug}}/lessons/thw-shell
 
-and you will jump directly to `shell` without having to go through
+and you will jump directly to `thw-shell` without having to go through
 the intermediate directory.
 
 ### Full vs. Relative Paths
@@ -225,16 +225,16 @@ directory in `home` which is a directory in `/`.
 
 Now enter the following command:
 
-    cd /home/swc/{{page.bootcamp_slug}}/shell
+    cd /home/swc/{{page.bootcamp_slug}}/lessons/thw-shell
 
-This jumps to `shell`. Now go back to the home directory. We saw
+This jumps to `thw-shell`. Now go back to the home directory. We saw
 earlier that the command:
 
-    cd {{page.bootcamp_slug}}/shell
+    cd {{page.bootcamp_slug}}/lessons/thw-shell
 
-had the same effect - it took us to the `shell` directory. But,
+had the same effect - it took us to the `thw-shell` directory. But,
 instead of specifying the absolute path
-(`/home/swc/{{page.bootcamp_slug}}/shell`), we specified a *relative
+(`/home/swc/{{page.bootcamp_slug}}/lessons/thw-shell`), we specified a *relative
 path*. In other words, we specified the path relative to our current
 directory. A absolute path always starts with a `/`. A relative path does
 not. You can usually use either a absolute path or a relative path
@@ -317,7 +317,7 @@ onto more advanced shell topics...
 
 **Wild cards**
 
-Navigate to the `shell/data/thomas` directory. This
+Navigate to the `thw-shell/data/thomas` directory. This
 directory contains our hearing test data for Thomas. If we type `ls`,
 we will see that there are a bunch of files which are just four digit
 numbers. By default, `ls` lists all of the files in a given
@@ -371,7 +371,7 @@ lot of time. When you start typing out the name of a directory, then
 hit the tab key, the shell will try to fill in the rest of the
 directory name. For example, enter:
 
-    cd S<tab>
+    cd 2<tab>
 
 The shell will fill in the rest of the directory name for
 `{{page.bootcamp_slug}}`. Now enter:
@@ -450,11 +450,11 @@ directory. This tells the shell to run the `hello` program which is
 located right here. So, you can run any program by entering the path
 to that program. You can run `hello` equally well by specifying:
 
-    /home/swc/{{page.bootcamp_slug}}/shell/hello
+    /home/swc/{{page.bootcamp_slug}}/lessons/thw-shell/hello
 
 Or by entering:
 
-    ../shell/hello
+    ../lessons/thw-shell/hello
 
 When there are no `/` characters, the shell assumes you want to look
 in one of the default places for the program.
@@ -480,12 +480,12 @@ is where the name comes from, `cat` is short for concatenate).
 * * * *
 **Short Exercises**
 
-1.  Print out the contents of the `shell/dictionary.txt`
+1.  Print out the contents of the `lessons/thw-shell/dictionary.txt`
     file. What does this file contain?
 
 2.  Without changing directories, (you should still be in `shell`),
     use one short command to print the contents of all of the files in
-    the `/home/swc/{{page.bootcamp_slug}}/shell/data/thomas` directory.
+    the `/home/swc/{{page.bootcamp_slug}}/lessons/thw-shell/data/thomas` directory.
 
 * * * *
 
@@ -493,7 +493,7 @@ is where the name comes from, `cat` is short for concatenate).
 be annoying to use. The program, `less`, is useful for this
 case. Enter the following command:
 
-    less shell/dictionary.txt
+    less lessons/thw-shell/dictionary.txt
 
 `less` opens the file, and lets you navigate through it. The commands
 are identical to the `man` program. Use "space" to go forward and hit
@@ -524,7 +524,7 @@ in reverse while using `less`.
 ### Redirection
 
 Let's turn to the experimental data from the hearing tests that we
-began with. This data is located in the `shell/data`
+began with. This data is located in the `lessons/thw-shell/data`
 directory. Each subdirectory corresponds to a particular participant
 in the study. Navigate to the `bert` subdirectory in `data`.  There
 are a bunch of text files which contain experimental data
@@ -551,7 +551,7 @@ exists.
 Use `>>`, to append the contents of all of the files which contain the
 number 4 in the directory:
 
-    /home/swc/{{page.bootcamp_slug}}/shell/data/gerdal
+    /home/swc/{{page.bootcamp_slug}}/lessons/thw-shell/data/gerdal
 
 to the existing `all_data` file. Thus, when you are done `all_data`
 should contain all of the experiment data from Bert and any
@@ -749,7 +749,7 @@ name to the file, then sort it and make a new file called Sorted.
 
 * * * *
 
-Let's navigate back to `shell/data`. Enter the following command:
+Let's navigate back to `lessons/thw-shell/data`. Enter the following command:
 
     wc bert/* | sort -k 3 -n
 
@@ -913,4 +913,4 @@ search for files which do not match a certain name.
 
 
 
-
+[Back to main page](../../../index.html)

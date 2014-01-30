@@ -1,11 +1,17 @@
 ---
 layout: lesson
 root: ../../..
+github_username: apawlik
+bootcamp_slug: 2014-02-03-TGAC
 title: Python Functions and Modules
 ---
 **Materials by: John Blischak, Anthony Scopatz, and other Software Carpentry instructors (Joshua R. Smith, Milad Fatenejad, Katy Huff, Tommy Guy and many more)**
 
 Computers are very useful for doing the same operation over and over. When you know you will be performing the same operation many times, it is best to encapsulate this similar code into a function or a method. Programming functions are related to mathematical functions, e.g. f(x), and it is helpful to think of them as abstract operators that produce output given some input. Let's look at some examples to solidify this concept.
+
+*The IPython Notebook file and the sample data files for this tutorial can be found in the course materials:* 
+
+	{{page.bootcamp_slug}}/lessons/thw-python/functions-and-modules
 
 ##Built-in string methods
 
@@ -404,11 +410,11 @@ Python comes with a huge number of modules available as part of the standard lib
 
 Now that you can write your own functions, you too will experience the dilemma of deciding whether to spend the extra time to make your code more general, and therefore more easily reused in the future.
 
-**Longer exercise: Reading Cochlear implant into Python**
+####Longer exercise: Reading Cochlear implant into Python
 
 For this exercise we will return to the cochlear implant data first introduced in the section on the shell. In order to analyse the data, we need to import the data into Python. Furthermore, since this is something that would have to be done many times, we will write a function to do this. As before, beginners should aim to complete Part 1 and more advanced participants should try to complete Part 2 and Part 3 as well.
 
-####Part 1: View the contents of the file from within Python
+**Part 1: View the contents of the file from within Python**
 
 Write a function view_cochlear that will open the file and print out each line. The only input to the function should be the name of the file as a string.
 
@@ -421,7 +427,7 @@ Test it out:
 	view_cochlear('/home/swc/boot-camps/shell/data/alexander/data_216.DATA')
 	view_cochlear('/home/swc/boot-camps/shell/data/Lawrence/Data0525')
 
-####Part 2:
+**Part 2:**
 
 Adapt your function above to exclude the first line using the flow control techniques we learned in the last lesson. The first line is just # (but don't forget to remove the '\n').
 
@@ -434,7 +440,7 @@ Test it out:
 	view_cochlear('/home/swc/boot-camps/shell/data/alexander/data_216.DATA')
 	view_cochlear('/home/swc/boot-camps/shell/data/Lawrence/Data0525')
 
-####Part 3:
+**Part 3:**
 
 Adapt your function above to return a dictionary containing the contents of the file. Split each line of the file by a colon followed by a space (': '). The first half of the string should be the key of the dictionary, and the second half should be the value of the dictionary.
 
@@ -478,3 +484,9 @@ Check your work:
 
 	transcribe('ATGC') == 'UACG'
 	transcribe('ATGCAGTCAGTGCAGTCAGT') == 'UACGUCAGUCACGUCAGUCA'
+	
+Previous: [Flow control](../flow-control/tutorial.html)
+
+
+
+[Back to main page](../../../index.html)

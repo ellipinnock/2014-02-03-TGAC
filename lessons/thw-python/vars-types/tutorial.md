@@ -12,6 +12,10 @@ title: Variables and data types
 This lecture is on basic programming in Python. In order to do the
 examples, we are going to use an environment called IPython Notebook. IPython Notebook uses files with *.ipynb extension. 
 
+*The IPython Notebook file and the sample data files for this tutorial can be found in the course materials:* 
+
+	{{page.bootcamp_slug}}/lessons/thw-python/vars-types
+
 The correct power dynamic is that people are the masters and the machines are servants. The computer is a hammer; it exists to help us get things done.  We can hammer nails with the handle, with the claw of the hammer; some of us even hammer nails with bricks.  But when you learn what part of the hammer works best with
 nails, and have some experience swinging it, you spend less time
 worrying about the hammering and more time worrying about your
@@ -55,7 +59,7 @@ Here is the reference material.
 
 
 
-## Contents
+## What we'll cover
 ### Variables and data types
 * print statements
 * variables

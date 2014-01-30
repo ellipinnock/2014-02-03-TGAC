@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../../..
+github_username: apawlik
+bootcamp_slug: 2014-02-03-TGAC
 title: Data Types in Python
 ---
 **Based on lecture materials by Milad Fatenejad, Joshua R. Smith, and Will Trimble**
@@ -8,6 +10,10 @@ title: Data Types in Python
 Python would be a fairly useless language if it weren't for the compound
 data types. The main two are lists and dictionaries, but I'll mention sets
 and tuples as well. I'll also go over reading text data from files. 
+
+*The IPython Notebook file and the sample data files for this tutorial can be found in the course materials:* 
+
+	{{page.bootcamp_slug}}/lessons/thw-python/data-structures
 
 ## Lists
 
@@ -45,8 +51,7 @@ In [3]: type(voltageList)
 Out[3]: <type 'list'>
 ```
 
-Python lists have the charming (annoying?) feature that they are indexed
-from zero. Therefore, to find the value of the first item in voltageList:
+Python lists are indexed from zero. Therefore, to find the value of the first item in voltageList:
 
 ```python
 In [4]: voltageList[0]
@@ -136,7 +141,7 @@ Out[15]: [-1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0]
 
 ### Length of Lists
 
-Sometimes you want to know how many items are in a list. Use the len command.
+Sometimes you want to know how many items are in a list. Use the len() method.
 
 ```python
 In [16]: len(voltageList)
@@ -162,7 +167,7 @@ they can sometimes make things look better.
 
 ## Assigning Variables to Other Variables
 
-Something that might cause you headaches in the future is how python deals
+Something that might cause you headaches in the future is how Python deals
 with assignment of one variable to another. When you set a variable equal
 to another, both variables point to the same thing. Changing the first one
 ends up changing the second. Be careful about this fact.
@@ -221,7 +226,7 @@ out. We will eventually do that.
 
 ## Tuples
 
-Tuples are another of python's basic compound data types that are almost
+Tuples are another of Python's basic compound data types that are almost
 like lists. The difference is that a tuple is immutable; once you set the
 data in it, the tuple cannot be changed. You define a tuple as follows.
 
@@ -233,13 +238,13 @@ Out[2]: <type 'tuple'>
 ```
 
 You can slice and index the tuple exactly like you would a list. Tuples are
-used in the inner workings of python, and a tuple can be used as a key in a
+used in the inner workings of Python, and a tuple can be used as a key in a
 dictionary, whereas a list cannot as we will see in a moment.
 
 ## Sets
 
-Most introductory python courses do not go over sets this early (or at
-all), but I've found this data type to be useful. The python set type is
+Most introductory Python courses do not go over sets this early (or at
+all), but I've found this data type to be useful. The Python set type is
 similar to the idea of a mathematical set: it is an unordered collection of
 unique things. Consider:
 
@@ -343,7 +348,7 @@ Out[15]:
 
 The help documentation has more information about what dictionaries can do.
 
-Its worth mentioning that the value part of a dictionary can be any kind of
+It's worth mentioning that the value part of a dictionary can be any kind of
 data, even another dictionary, or some complex nested structure. The same
 is true about a list: they can contain complex data types.
 
@@ -352,4 +357,10 @@ Lists are mutable, and therefore cannot.
 
 When you architect software in python, most data will end up looking either
 like a list or a dictionary. These two data types are very important in
-python and you'll end up using them all the time.
+Python and you'll end up using them all the time.
+
+Next: [Flow control](../flow-control/tutorial.html)
+
+Previous: [Variables and types](../vars-types/tutorial.html)
+
+[Back to main page](../../../index.html)
