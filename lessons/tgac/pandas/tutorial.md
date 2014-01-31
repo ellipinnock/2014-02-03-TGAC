@@ -1,6 +1,8 @@
 ---
 layout: lesson
 root: ../../..
+github_username: apawlik
+bootcamp_slug: 2014-02-03-TGAC
 title: Scientific computing with Python - Introduction to Pandas
 ---
 **Materials by  Mike Hansen**
@@ -16,6 +18,10 @@ In this tutorial, we'll go through the basics of pandas using a year's worth of 
 Pandas has a **lot** of functionality, so we'll only be able to cover a small fraction of what you can do.
 Check out the (very readable) [pandas docs](http://pandas.pydata.org/pandas-docs/stable/) if you want to learn more.
 
+*The IPython Notebook file and the sample data files for this tutorial can be found in the course materials:* 
+
+	{{page.bootcamp_slug}}/lessons/tgac/pandas/
+
 ## Getting Started
 
 Installing pandas should be an easy process if you use pip:
@@ -28,7 +34,7 @@ OK, let's get started by importing the pandas library
 
 	import pandas
 
-Next, let's read in [our data](data/weather_year.csv).
+Next, let's read in [our data](https://github.com/{{page.github_username}}/lessons/tgac/pandas/data/weather_year.csv).
 Because it's in a CSV file, we can use pandas' `read_csv` function to pull it directly into a [DataFrame](http://pandas.pydata.org/pandas-docs/stable/dsintro.html#dataframe).
 
 	data = pandas.read_csv("data/weather_year.csv")
