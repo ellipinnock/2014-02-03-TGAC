@@ -34,8 +34,7 @@ OK, let's get started by importing the pandas library
 
 	import pandas
 
-Next, let's read in [our data](https://github.com/{{page.github_username}}/blob/gh-pages/lessons/tgac/pandas/data/weather_year.csv).
-s
+Next, let's read in [our data](https://github.com/{{page.github_username}}/{{page.bootcamp_slug}}/blob/gh-pages/lessons/tgac/pandas/data/weather_year.csv).
 Because it's in a CSV file, we can use pandas' `read_csv` function to pull it directly into a [DataFrame](http://pandas.pydata.org/pandas-docs/stable/dsintro.html#dataframe).
 
 	data = pandas.read_csv("data/weather_year.csv")
