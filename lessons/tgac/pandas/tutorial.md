@@ -7,7 +7,9 @@ title: Scientific computing with Python - Introduction to Pandas
 ---
 **Materials by  Mike Hansen**
 
-When dealing with numeric matrices and vectors in Python, [NumPy](http://www.numpy.org/) makes life a lot easier.
+There are various very useful libraries written in Python that are widely used for scientific computing. If you are unfamiliar with the concept of a "library" in programming, you can think of it as a collection of modules with functions that do specific things (for example, statistical tests) that you can call from the code you write yourself.
+
+For example, when dealing with numeric matrices and vectors in Python, [NumPy](http://www.numpy.org/) makes life a lot easier.
 For more complex data, however, it leaves a lot to be desired.
 If you're used to working with [data frames in R](http://www.r-tutor.com/r-introduction/data-frame), doing data analysis directly with NumPy feels like a step back.
 
@@ -41,7 +43,7 @@ Because it's in a CSV file, we can use pandas' `read_csv` function to pull it di
 
 We can get a summary of the DataFrame by printing the object.
 
-data
+	data
 
 
 
@@ -217,7 +219,7 @@ data.EDT
 Name: EDT, Length: 366
 ```
 
-We'll be mostly using the dot syntax here because you can auto-complete the names in IPython. The first pandas function we'll learn about is `head()`. This gives us the first 5 items in a column (or the first 5 rows in the DataFrame).
+We'll be mostly using the dot syntax here because you can auto-complete the names in IPython and IPython Notebook. The first pandas function we'll learn about is `head()`. This gives us the first 5 items in a column (or the first 5 rows in the DataFrame).
 
 ```python
 data.EDT.head()
@@ -662,6 +664,10 @@ Index([max_temp, mean_temp, min_temp, max_dew, mean_dew, min_dew,
 ```
 
 Note that we need to pass in `axis=1` in order to drop a column. For more details, check out the documentation for `drop`.
+
+```python
+pandas.DataFrame.drop?
+```
 
 ## Exercise 3:
 
