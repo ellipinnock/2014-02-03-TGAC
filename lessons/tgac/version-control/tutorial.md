@@ -568,7 +568,7 @@ we want to.
 tools for browsing, collaborating on and documenting code. Your
 organisation may also offer support for hosting Git repositories - ask
 your local system administrator. GitHub, like other services such
-as[Launchpad](https://launchpad.net),[Bitucket](http://bitbucket.org),
+as [Launchpad](https://launchpad.net),[Bitucket](http://bitbucket.org),
 [GoogleCode](http://code.google.com), and
 [SourceForge](http://sourceforge.net) provides a wealth of resources to
 support projects including:

@@ -1,10 +1,17 @@
 ---
 layout: lesson
 root: ../../..
-title: Testing
+github_username: apawlik
+bootcamp_slug: 2014-02-03-TGAC
+title: Debugging and testing
 ---
 
-**Based on materials by Mike Jackson, Katy Huff, Rachel Slaybaugh, and Anthony Scopatz. With special thanks to Gordon Webster, the [Digital Biologist](http://www.digitalbiologist.com), for kindly allowing use of his [Python DNA function](http://www.digitalbiologist.com/2011/04/code-tutorial-getting-started-with-python.html).**
+**Based on materials by Mike Jackson, Katy Huff, Rachel Slaybaugh, Patrick Fuller and Anthony Scopatz. With special thanks to Gordon Webster, the [Digital Biologist](http://www.digitalbiologist.com), for kindly allowing use of his [Python DNA function](http://www.digitalbiologist.com/2011/04/code-tutorial-getting-started-with-python.html).**
+
+
+
+
+
 
 ## Some questions for you
 
@@ -15,6 +22,75 @@ Let's open with some questions. How many of you test your code or scripts...
 * With input data you know to be incorrect and check that your code or scripts behave appropriately e.g. giving a warning, or exiting, or anything that doesn't involve producing output data that *seems* OK but is not?
 * After every change you've made to fix a bug or optimise your code or to add a new feature?
 * Using some form of automation e.g. a set of testing scripts or a test framework?
+
+
+##Debugging
+Unless you're perfect, you are bound to make errors. Especially early 
+on, expect to spend much more time debugging than actually coding. The process 
+fits the Pareto principle - you're going to spend \~20% of your time writing 
+~80% of your code, and the other ~80% of your time will be spent screaming 
+obscenities at your computer (I think that's what the Pareto principle says, 
+anyway). Remember to keep calm, and **LEARN** from your mistakes.
+
+
+## Exceptions, errors, and tracebacks
+
+When your code errors, Python will stop and return an _exception_ that attempts 
+to tell you what's up. There are \~165 exceptions in the Python standard 
+library, and you'll be seeing many of them very soon. Exceptions to befriend 
+include:
+
+```python
+SyntaxError # You're probably missing a parenthesis or colon
+NameError   # There's probably a variable name typo somewhere
+TypeError   # You're doing something with incompatible variable types
+ValueError  # You're calling a function with the wrong parameter
+IOError     # You're trying to use a file that doesn't exist
+IndexError  # You're trying to reference a list element that doesn't exist
+KeyError    # Similar to an IndexError, but for dictionaries
+Exception   # This means "an error of any type" - hopefully you don't see it often
+```
+
+When code returns an exception, we say that the exception was _thrown_ or
+_raised_. These exceptions may be _handled_ or _caught_ by the code.
+
+When an exception is printed, it often comes with something called a
+_traceback_. This is Python's attempt to tell you where the code errored. It
+will look like gibberish for a while, but that impression will go away with time.
+
+
+## Debuggers: for the deep-rooted errors
+For  complex issues code bugs, you want to follow the code's logic line by line. One lazy way to do this is to put `print` statements everywhere, which allows you
+to view variables over time. However, this gets messy quickly, and you lose
+control of what variables you can see once you start executing.
+
+This is where the Python DeBugger, or _pdb_, comes into play. With it, you can 
+step through your code and watch as variables are changed.
+
+All you have to do to use this is import the `pdb` module and call the 
+`set_trace()` method.
+
+```python
+import pdb
+
+	# [ ... ]
+	# Your code here
+	# [ ... ]
+
+pdb.set_trace()
+```
+
+Now, when you run the code, it will stop at whatever line you put `set_trace()`.
+You'll be prompted to give a command. Some common commands include:
+
+ * `continue` continues on to the next time a `set_trace()` line is hit
+ * `print \*variable\*` prints the current value of a specified variable
+ * `list` shows the source code around the `set_trace()` line
+ * `args` prints the values of all the arguments in the current function
+
+There are a lot more options, which can be found [here](http://docs.python.org/2/library/pdb.html), but these few should be enough to get you running with pdb.
+
+
 
 ## What is testing?
 
@@ -76,26 +152,20 @@ But if this is not compelling, then, if nothing else, writing tests is an invest
 
 Before we test our code, it can be very productive to get a colleague to look at it for us...why?
 
-> **What we know about software development - code reviews work** 
+ **What we know about software development - code reviews work** 
 
-> Fagan (1976) discovered that a rigorous inspection can remove 60-90% of errors before the first test is run. 
-> M.E., Fagan (1976). [Design and Code inspections to reduce errors in program development](http://www.mfagan.com/pdfs/ibmfagan.pdf). IBM Systems Journal 15 (3): pp. 182-211.
+Fagan (1976) discovered that a rigorous inspection can remove 60-90% of errors before the first test is run. 
+ M.E., Fagan (1976). [Design and Code inspections to reduce errors in program development](http://www.mfagan.com/pdfs/ibmfagan.pdf). IBM Systems Journal 15 (3): pp. 182-211.
 
-> **What we know about software development - code reviews should be about 60 minutes long** 
+ **What we know about software development - code reviews should be about 60 minutes long** 
 
-> Cohen (2006) discovered that all the value of a code review comes within the first hour, after which reviewers can become exhausted and the issues they find become ever more trivial.
-> J. Cohen (2006). [Best Kept Secrets of Peer Code Review](http://smartbear.com/SmartBear/media/pdfs/best-kept-secrets-of-peer-code-review.pdf). SmartBear, 2006. ISBN-10: 1599160676. ISBN-13: 978-1599160672.
+Cohen (2006) discovered that all the value of a code review comes within the first hour, after which reviewers can become exhausted and the issues they find become ever more trivial.
+ J. Cohen (2006). [Best Kept Secrets of Peer Code Review](http://smartbear.com/SmartBear/media/pdfs/best-kept-secrets-of-peer-code-review.pdf). SmartBear, 2006. ISBN-10: 1599160676. ISBN-13: 978-1599160672.
 
-## Contents
-
-* [Let's start writing some tests](#Writing)
-* [Testing in practice](#RealWorld)
-* [Test-driven development](#TDD)
-* [Conclusions and further information](#Conclusion)
 
 
 <a name="Writing"></a>
-## Let's start writing some tests
+## Testing with Python
 
 In the file [dna.py](python/dna/dna.py) we have a Python dictionary that stores the molecular weights of the 4 standard DNA nucleotides, A, T, C and G, 
 
@@ -418,3 +488,12 @@ Now update `complement` to make your tests pass. You may want to reuse some of t
 When we're done, not only do we have a working function, we also have a set of tests. There's no risk of us leaving the tests "till later" and then never having time to write them.
 
 
+## Further information
+
+* [Software Carpentry](http://software-carpentry.org/)'s online [testing](http://software-carpentry.org/4_0/test/index.html) lectures.
+* A discussion on [is it worthwhile to write unit tests for scientific research codes?](http://scicomp.stackexchange.com/questions/206/is-it-worthwhile-to-write-unit-tests-for-scientific-research-codes)
+* G. Wilson, D. A. Aruliah, C. T. Brown, N. P. Chue Hong, M. Davis, R. T. Guy, S. H. D. Haddock, K. Huff, I. M. Mitchell, M. Plumbley, B. Waugh, E. P. White, P. Wilson (2012) "[Best Practices for Scientific Computing](http://arxiv.org/abs/1210.0530)", arXiv:1210.0530 [cs.MS].
+
+
+
+[Back to main page](../../../index.html)
