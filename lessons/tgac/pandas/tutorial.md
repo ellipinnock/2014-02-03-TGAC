@@ -553,11 +553,11 @@ datetime.datetime(2012, 3, 10, 0, 0)
 Using the `apply()` method, which takes a function (**without** the parentheses), we can apply `strptime` to each value in the column. We'll overwrite the string date values with their Python `datetime` equivalents.
 
 ```python
-# Define a function to convert strings to dates
+	# Define a function to convert strings to dates
 def string_to_date(date_string):
     return datetime.strptime(date_string, "%Y-%m-%d")
 
-# Run the function on every date string and overwrite the column
+	# Run the function on every date string and overwrite the column
 data.date = data.date.apply(string_to_date)
 data.date.head()
 ```
@@ -640,7 +640,7 @@ dtypes: float64(4), int64(16), object(3)
 With all of the dates in the index now, we no longer need the "date" column. Let's drop it.
 
 ```python
-data = data.drop("date", axis=1)
+data = data.drop("date", axis=1) 
 data.columns
 ```
 
@@ -1431,8 +1431,8 @@ Freq: D, Name: precipitation
 We'll replace "T" with a very small number, and convert the rest of the strings to floats:
 
 ```python
-# Convert precipitation to floating point number
-# "T" means "trace of precipitation"
+	# Convert precipitation to floating point number
+	# "T" means "trace of precipitation"
 def precipitation_to_float(precip_str):
     if precip_str == "T":
         return 1e-10  # Very small value
@@ -2028,7 +2028,7 @@ Length: 366
 When you call `drop()`, though, it's flipped. To drop a column, you need to pass `axis=1`
 
 ```python
-data.drop("events", axis=1).columns
+data.drop(["events"], axis=1).columns
 ```
 
 
